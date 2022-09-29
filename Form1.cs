@@ -16,5 +16,4 @@ public partial class Form1 : Form
             this.Controls.Add(pb1);
         };
     }
-    
 }
