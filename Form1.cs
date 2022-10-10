@@ -15,5 +15,6 @@ public partial class Form1 : Form
             pb1.SizeMode = PictureBoxSizeMode.StretchImage;
             this.Controls.Add(pb1);
         };
+        Console.WriteLine("aa");
     }
 }
