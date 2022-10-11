@@ -15,9 +15,9 @@ public class KMeans
             var b = rando.Next(255);
             centroids[i] = Color.FromArgb(r, g, b);
         }
-        int avarageR = 0;
-        int avarageG = 0;
-        int avarageB = 0;
+        long avarageR = 0;
+        long avarageG = 0;
+        long avarageB = 0;
 
         int epochs = 0;
         while (epochs < 50)
@@ -31,16 +31,16 @@ public class KMeans
             {
                 for(int x = 0; x<bmp.Width; x++)
                 {
-                    Color clrPixelBmp = bmp.GetPixel(y, x);
+                    Color clrPixelBmp = bmp.GetPixel(x, y);
 
                     int bestcentroidindex = -1;
                     double minDist = double.PositiveInfinity;
                     
                     for(int i = 0; i < K; i++)
                     {
-                        int centroidR = centroid[i].R;
-                        int centroidG = centroid[i].G;
-                        int centroidB = centroid[i].B;
+                        int centroidR = centroids[i].R;
+                        int centroidG = centroids[i].G;
+                        int centroidB = centroids[i].B;
                         
                         int clrPixelBmpR = clrPixelBmp.R;
                         int clrPixelBmpG = clrPixelBmp.G;
@@ -65,11 +65,14 @@ public class KMeans
                 }
             }
             for(int i = 0; i < K; i++)
-            { 
-                avarageR = sum[i].Item1 / sum[i].Item4;
-                avarageG = sum[i].Item2 / sum[i].Item4;
-                avarageB = sum[i].Item3 / sum[i].Item4;
-                centroids[i] = new Color((byte)avarageR, (byte)avarageG, (byte)avarageB);
+            {
+                if (sums[i].Item4 == 0)
+                    continue;
+                avarageR = sums[i].Item1 / sums[i].Item4;
+                avarageG = sums[i].Item2 / sums[i].Item4;
+                avarageB = sums[i].Item3 / sums[i].Item4;
+                centroids[i] = Color.FromArgb((int)avarageR, (int)avarageG, (int)avarageB);
+                // centroids[i] = new Color((byte)avarageR, (byte)avarageG, (byte)avarageB);
             }
         }
         return centroids;
