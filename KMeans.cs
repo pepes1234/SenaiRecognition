@@ -20,7 +20,7 @@ public class KMeans
         long avarageB = 0;
 
         int epochs = 0;
-        while (epochs < 50)
+        while (epochs < int.MaxValue)
         {
             epochs++;
             List<(long, long, long, long)> sums = new List<(long, long, long, long)>();
@@ -51,7 +51,6 @@ public class KMeans
                         int db = centroidB - clrPixelBmpB;
 
                         double pitagoras = dr * dr + dg * dg + db * db;
-                        pitagoras = Math.Sqrt(pitagoras);
                         
                         if(minDist > pitagoras)
                         {
@@ -64,6 +63,9 @@ public class KMeans
                     sums[bestcentroidindex] = (sum.Item1 + clrPixelBmp.R, sum.Item2 + clrPixelBmp.G, sum.Item3 + clrPixelBmp.B, sum.Item4 + 1);
                 }
             }
+
+            double maxdif = double.NegativeInfinity;
+            double diff = 0;
             for(int i = 0; i < K; i++)
             {
                 if (sums[i].Item4 == 0)
@@ -72,7 +74,25 @@ public class KMeans
                 avarageG = sums[i].Item2 / sums[i].Item4;
                 avarageB = sums[i].Item3 / sums[i].Item4;
                 centroids[i] = Color.FromArgb((int)avarageR, (int)avarageG, (int)avarageB);
-                // centroids[i] = new Color((byte)avarageR, (byte)avarageG, (byte)avarageB);
+
+                long centroidR = centroids[i].R;
+                long centroidG = centroids[i].G;
+                long centroidB = centroids[i].B;
+
+                long dr = centroidR - avarageR;
+                long dg = centroidG - avarageG;
+                long db = centroidB - avarageB;
+
+                diff = dr * dr + dg * dg + db * db;
+
+                if(diff > maxdif)
+                {
+                    maxdif = diff;
+                }
+                if(maxdif > 4)
+                {
+                    return centroids;
+                }
             }
         }
         return centroids;
