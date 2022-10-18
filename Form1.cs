@@ -29,7 +29,7 @@ public partial class Form1 : Form
             }
         
             KMeans kms = new KMeans();
-            Color[] clr = kms.Fit(bmp, 5);
+            Color[] clr = kms.Fit(bmp, 10);
 
             for(int i = 0; i < 10; i++)
             {

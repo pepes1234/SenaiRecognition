@@ -1,7 +1,7 @@
 using System;
 using System.Drawing;
 using System.Collections.Generic;
-
+//bgr
 public class KMeans
 {
     public Color[] Fit(Bitmap bmp, int K)
@@ -20,16 +20,18 @@ public class KMeans
         long avarageB = 0;
 
         int epochs = 0;
-        while (epochs < int.MaxValue)
+        while (epochs < 40)
         {
             epochs++;
             List<(long, long, long, long)> sums = new List<(long, long, long, long)>();
             for (int i = 0; i < K; i++)
                 sums.Add((0, 0, 0, 0));
 
-            for(int y = 0; y<bmp.Height; y++)
+            int jump = rando.Next(2, 8);
+            int start = rando.Next(2);
+            for(int y = start; y<bmp.Height; y += 2)
             {
-                for(int x = 0; x<bmp.Width; x++)
+                for(int x = start; x<bmp.Width; x += jump)
                 {
                     Color clrPixelBmp = bmp.GetPixel(x, y);
 
@@ -64,7 +66,7 @@ public class KMeans
                 }
             }
 
-            double maxdif = double.NegativeInfinity;
+            double mindif = double.PositiveInfinity;
             double diff = 0;
             for(int i = 0; i < K; i++)
             {
@@ -85,14 +87,14 @@ public class KMeans
 
                 diff = dr * dr + dg * dg + db * db;
 
-                if(diff > maxdif)
+                if(diff < mindif)
                 {
-                    maxdif = diff;
+                    mindif = diff;
                 }
-                if(maxdif > 4)
-                {
-                    return centroids;
-                }
+            }
+            if(mindif > 10)
+            {
+                return centroids;
             }
         }
         return centroids;
