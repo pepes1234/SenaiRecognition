@@ -1,10 +1,15 @@
 using System;
-using System.Drawing;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Windows.Forms;
+
 //bgr
 public class KMeans
 {
-    public Color[] Fit(Bitmap bmp, int K)
+    public unsafe Color[] Fit(Bitmap bmp, int K)
     {
         Color[] centroids = new Color[K];
         Random rando = new Random();
@@ -18,6 +23,10 @@ public class KMeans
         long avarageR = 0;
         long avarageG = 0;
         long avarageB = 0;
+            
+        var data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), 
+            ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+        byte* pointer = (byte*)data.Scan0.ToPointer();
 
         int epochs = 0;
         while (epochs < 40)
@@ -29,12 +38,12 @@ public class KMeans
 
             int jump = rando.Next(2, 8);
             int start = rando.Next(2);
-            for(int y = start; y<bmp.Height; y += 2)
-            {
-                for(int x = start; x<bmp.Width; x += jump)
-                {
-                    Color clrPixelBmp = bmp.GetPixel(x, y);
 
+            for(int y = start; y < data.Height; y += 2)
+            {
+                byte* line = pointer + y * data.Stride;
+                for(int x = start; x < 3 * data.Width; x += 3 + jump, line += 3)
+                {
                     int bestcentroidindex = -1;
                     double minDist = double.PositiveInfinity;
                     
@@ -44,9 +53,9 @@ public class KMeans
                         int centroidG = centroids[i].G;
                         int centroidB = centroids[i].B;
                         
-                        int clrPixelBmpR = clrPixelBmp.R;
-                        int clrPixelBmpG = clrPixelBmp.G;
-                        int clrPixelBmpB = clrPixelBmp.B;
+                        int clrPixelBmpR = line[2];
+                        int clrPixelBmpG = line[1];
+                        int clrPixelBmpB = line[0];
 
                         int dr = centroidR - clrPixelBmpR;
                         int dg = centroidG - clrPixelBmpG;
@@ -62,7 +71,7 @@ public class KMeans
                     }
                     
                     var sum = sums[bestcentroidindex];
-                    sums[bestcentroidindex] = (sum.Item1 + clrPixelBmp.R, sum.Item2 + clrPixelBmp.G, sum.Item3 + clrPixelBmp.B, sum.Item4 + 1);
+                    sums[bestcentroidindex] = (sum.Item1 + line[2], sum.Item2 + line[1], sum.Item3 + line[0], sum.Item4 + 1);
                 }
             }
 
@@ -97,6 +106,8 @@ public class KMeans
                 return centroids;
             }
         }
+        bmp.UnlockBits(data);
+
         return centroids;
     }
 }

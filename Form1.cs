@@ -19,7 +19,7 @@ public partial class Form1 : Form
             this.Controls.Add(pb1);
             pb1.Location = new Point(10, 10);
             bmp = new Bitmap(@"TestImages\penta.jpg", true);
-            for(int i = 0; i < 10; i++)
+            for(int i = 0; i < 25; i++)
             {
                 pnlist.Add(new Panel());
                 pnlist[i].Size = new Size(25, 25);
@@ -29,9 +29,9 @@ public partial class Form1 : Form
             }
         
             KMeans kms = new KMeans();
-            Color[] clr = kms.Fit(bmp, 10);
+            Color[] clr = kms.Fit(bmp, 15);
 
-            for(int i = 0; i < 10; i++)
+            for(int i = 0; i < 15; i++)
             {
                 pnlist[i].BackColor = clr[i];
             }
