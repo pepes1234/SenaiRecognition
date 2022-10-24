@@ -1,5 +1,6 @@
 namespace SenaiRecognition;
 using System.IO;
+using System;
 
 public partial class Form1 : Form
 {
@@ -29,9 +30,12 @@ public partial class Form1 : Form
             }
         
             KMeans kms = new KMeans();
-            Color[] clr = kms.Fit(bmp, 15);
 
-            for(int i = 0; i < 15; i++)
+            var now = DateTime.Now;
+            Color[] clr = kms.Fit(bmp, 10);
+            MessageBox.Show((DateTime.Now - now).Milliseconds.ToString());
+
+            for(int i = 0; i < 10; i++)
             {
                 pnlist[i].BackColor = clr[i];
             }

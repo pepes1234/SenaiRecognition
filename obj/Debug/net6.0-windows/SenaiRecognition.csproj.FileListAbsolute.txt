@@ -7,7 +7,6 @@ C:\Users\Aluno\Documents\GitHub\SenaiRecognition\bin\Debug\net6.0-windows\SenaiR
 C:\Users\Aluno\Documents\GitHub\SenaiRecognition\bin\Debug\net6.0-windows\SenaiRecognition.deps.json
 C:\Users\Aluno\Documents\GitHub\SenaiRecognition\bin\Debug\net6.0-windows\SenaiRecognition.runtimeconfig.json
 C:\Users\Aluno\Documents\GitHub\SenaiRecognition\bin\Debug\net6.0-windows\SenaiRecognition.dll
-C:\Users\Aluno\Documents\GitHub\SenaiRecognition\bin\Debug\net6.0-windows\ref\SenaiRecognition.dll
 C:\Users\Aluno\Documents\GitHub\SenaiRecognition\bin\Debug\net6.0-windows\SenaiRecognition.pdb
 C:\Users\Aluno\Documents\GitHub\SenaiRecognition\obj\Debug\net6.0-windows\SenaiRecognition.dll
 C:\Users\Aluno\Documents\GitHub\SenaiRecognition\obj\Debug\net6.0-windows\ref\SenaiRecognition.dll
@@ -28,3 +27,4 @@ C:\Users\Aluno\Documents\SenaiRecognition\obj\Debug\net6.0-windows\refint\SenaiR
 C:\Users\Aluno\Documents\SenaiRecognition\obj\Debug\net6.0-windows\SenaiRecognition.pdb
 C:\Users\Aluno\Documents\SenaiRecognition\obj\Debug\net6.0-windows\SenaiRecognition.genruntimeconfig.cache
 C:\Users\Aluno\Documents\SenaiRecognition\obj\Debug\net6.0-windows\ref\SenaiRecognition.dll
+C:\Users\Aluno\Documents\GitHub\SenaiRecognition\obj\Debug\net6.0-windows\refint\SenaiRecognition.dll

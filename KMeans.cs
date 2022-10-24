@@ -36,11 +36,12 @@ public class KMeans
             for (int i = 0; i < K; i++)
                 sums.Add((0, 0, 0, 0));
 
-            int jump = rando.Next(2, 8);
             int start = rando.Next(2);
 
-            for(int y = start; y < data.Height; y += 2)
+            Parallel.For(start, data.Height / 3, y =>
             {
+                int jump = rando.Next(2, 12);
+                y = 3 * y;
                 byte* line = pointer + y * data.Stride;
                 for(int x = start; x < 3 * data.Width; x += 3 + jump, line += 3)
                 {
@@ -73,7 +74,7 @@ public class KMeans
                     var sum = sums[bestcentroidindex];
                     sums[bestcentroidindex] = (sum.Item1 + line[2], sum.Item2 + line[1], sum.Item3 + line[0], sum.Item4 + 1);
                 }
-            }
+            });
 
             double mindif = double.PositiveInfinity;
             double diff = 0;
