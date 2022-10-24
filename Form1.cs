@@ -5,8 +5,11 @@ using System;
 public partial class Form1 : Form
 {
     PictureBox pb1;
+    PictureBox pb2;
     List<Panel> pnlist = new List<Panel>();
+    List<Panel> pnlist2 = new List<Panel>();
     Bitmap bmp;
+    Bitmap bmp1;
     public Form1()
     {
         InitializeComponent();
@@ -14,13 +17,22 @@ public partial class Form1 : Form
         Load += delegate
         {
             pb1 = new PictureBox();
-            pb1.Image = Image.FromFile(@"TestImages\penta.jpg");
+            pb1.Image = Image.FromFile(@"TestImages\imagem8.jpeg");
             pb1.Size = new Size(2 * 246, 2 * 164);
             pb1.SizeMode = PictureBoxSizeMode.StretchImage;
             this.Controls.Add(pb1);
             pb1.Location = new Point(10, 10);
-            bmp = new Bitmap(@"TestImages\penta.jpg", true);
-            for(int i = 0; i < 25; i++)
+            bmp = new Bitmap(@"TestImages\imagem8.jpeg", true);
+
+            pb2 = new PictureBox();
+            pb2.Image = Image.FromFile(@"TestImages\imagem4.jpeg");
+            pb2.Size = new Size(2 * 246, 2 * 164);
+            pb2.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.Controls.Add(pb2);
+            pb2.Location = new Point(10, 350);
+            bmp1 = new Bitmap(@"TestImages\imagem4.jpeg", true);
+
+            for(int i = 0; i < 10; i++)
             {
                 pnlist.Add(new Panel());
                 pnlist[i].Size = new Size(25, 25);
@@ -28,7 +40,17 @@ public partial class Form1 : Form
                 pnlist[i].BackColor = Color.Gray;
                 this.Controls.Add(pnlist[i]);
             }
-        
+
+            
+            for(int i = 0; i < 10; i++)
+            {
+                pnlist2.Add(new Panel());
+                pnlist2[i].Size = new Size(25, 25);
+                pnlist2[i].Location = new Point(this.Width - 200, i * 40 + pnlist2[i].Height);
+                pnlist2[i].BackColor = Color.Gray;
+                this.Controls.Add(pnlist2[i]);
+            }
+
             KMeans kms = new KMeans();
 
             var now = DateTime.Now;
@@ -38,6 +60,21 @@ public partial class Form1 : Form
             for(int i = 0; i < 10; i++)
             {
                 pnlist[i].BackColor = clr[i];
+            }
+
+            Color[] clr1 = kms.Fit(bmp1, 10);
+            
+            for(int i = 0; i < 10; i++)
+            {
+                pnlist2[i].BackColor = clr1[i];
+            }
+            
+            for(int i = 0; i < 10; i++)
+            {
+                for(int j = 0; j < 10; j++)
+                {
+                    
+                }
             }
         };
     }
