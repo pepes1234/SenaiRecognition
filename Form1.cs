@@ -4,6 +4,7 @@ using System;
 
 public partial class Form1 : Form
 {
+    Label lb1;
     PictureBox pb1;
     PictureBox pb2;
     List<Panel> pnlist = new List<Panel>();
@@ -16,6 +17,10 @@ public partial class Form1 : Form
 
         Load += delegate
         {
+            lb1 = new Label();
+            lb1.AutoSize = true;
+            this.Controls.Add(lb1);
+            
             pb1 = new PictureBox();
             pb1.Image = Image.FromFile(@"TestImages\imagem8.jpeg");
             pb1.Size = new Size(2 * 246, 2 * 164);
@@ -68,14 +73,18 @@ public partial class Form1 : Form
             {
                 pnlist2[i].BackColor = clr1[i];
             }
-            
+            int CoresIguais = 0;
             for(int i = 0; i < 10; i++)
             {
                 for(int j = 0; j < 10; j++)
                 {
-                    
+                    if(clr1[i] == clr[j])
+                    {
+                        CoresIguais++;
+                    }
                 }
             }
+            lb1.Text = CoresIguais.ToString();
         };
     }
 }
