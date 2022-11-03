@@ -74,32 +74,49 @@ public partial class Form1 : Form
                 pnlist2[i].BackColor = clr1[i];
             }
             
-            
+            double[] diffForColor = new double[10];
+            double mindiffPerColor = 0;
             double mindif = double.PositiveInfinity;
             double diff = 0;
             
+            // for(int i = 0; i < 10; i++)
+            // {
+            //     int clrR = clr[i].R;
+            //     int clrG = clr[i].G;
+            //     int clrB = clr[i].B;
+
+            //     for (int j = 0; j < 10; j++)
+            //     {       
+            //         int clr1R = clr1[j].R;
+            //         int clr1G = clr1[j].G;
+            //         int clr1B = clr1[j].B;
+                    
+            //         long dr = clrR - clr1R;
+            //         long dg = clrG - clr1G;
+            //         long db = clrB - clr1B;
+
+            //         diff = dr * dr + dg * dg + db * db;
+            //         for(int x = 0; x < 10; x++)
+            //         {
+                        
+            //         }
+            //     }            
+                   
+            // }
             for(int i = 0; i < 10; i++)
             {
-                int clrR = clr[i].R;
-                int clrG = clr[i].G;
-                int clrB = clr[i].B;
+                for(int j = 0; j < 10; i++)
+                {  
+                    int clrR = clr[i].R;
+                    int clrG = clr[i].G;
+                    int clrB = clr[i].B;
+                    
+                    int clrR1 = clr1[i].R;
+                    int clrG1 = clr1[i].G;
+                    int clrB1 = clr1[i].B;
 
-                for (int j = 0; j < 10; j++)
-                {       
-                    int clr1R = clr1[j].R;
-                    int clr1G = clr1[j].G;
-                    int clr1B = clr1[j].B;
-
-                    long dr = clrR - clr1R;
-                    long dg = clrG - clr1G;
-                    long db = clrB - clr1B;
-
-                    diff = dr * dr + dg * dg + db * db;
-                    if(clr == clr1)
-                    {
-                        
-                    }
-                }    
+                    diff = clrR *
+                }
             }
         };
     }
