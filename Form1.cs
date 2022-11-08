@@ -75,17 +75,18 @@ public partial class Form1 : Form
             }
             
             double[] diffForColor = new double[10];
-            double mindiffPerColor = 0;
+            double[] mindiffPerColor = new double[10];
             double mindif = double.PositiveInfinity;
             double diff = 0;
+            double[] colorWithMinDiff = new double[10];
             
-            for(int i = 0; i <= 10; i++)
+            for(int i = 0; i < 10; i++)
             {
                 int clrR = clr[i].R;
                 int clrG = clr[i].G;
                 int clrB = clr[i].B;
 
-                for (int j = 0; j <= 10; j++)
+                for (int j = 0; j < 10; j++)
                 {       
                     int clr1R = clr1[j].R;
                     int clr1G = clr1[j].G;
@@ -99,14 +100,17 @@ public partial class Form1 : Form
                     if(mindif > diff)
                     {
                         mindif = diff;
+                        colorWithMinDiff[i] = j;
                     }
-                }            
+                }
+
                 diffForColor[i] = mindif;
+                mindif = double.PositiveInfinity;
             }
             string lbText = "";
-            for(int i = 0; i < 11; i++)
+            for(int i = 0; i < 10; i++)
             {
-                lbText += "Color " + i + " diff=" +  diffForColor[i].ToString() + " ";
+                lbText += "Color " + i + " diff=" +  diffForColor[i].ToString() + " color=" + colorWithMinDiff[i].ToString() + "     ";
             }
             lb1.Text = lbText;
         };
